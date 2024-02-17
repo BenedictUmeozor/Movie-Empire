@@ -13,6 +13,7 @@ const MovieSearch = () => {
       event.key === "Enter" &&
       event.currentTarget.value
     ) {
+      context?._setPage(1);
       context?._setSearchTerm(event.currentTarget.value);
     }
   };
@@ -25,6 +26,7 @@ const MovieSearch = () => {
         placeholder="Search anything"
         className="h-full w-full block border border-gray-900 rounded-2xl px-2 pl-[15%] placeholder:text-xs bg-transparent text-xs focus:outline-none focus:placeholder:text-primary"
         onKeyDown={handleKeyDown}
+        defaultValue={context?.searchTerm}
       />
     </div>
   );

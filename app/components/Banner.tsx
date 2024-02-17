@@ -1,20 +1,73 @@
 "use client";
 
 import { useMovieContext } from "@/contexts/MovieContext";
-import Image from "next/image";
+import useInterval from "@/hooks/useInterval";
+import { SingleMovie } from "@/types/types";
+import { Rating } from "@smastrom/react-rating";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { Video } from "react-feather";
 
 const Banner = () => {
   const context = useMovieContext();
+  const [movie, setMovie] = useState<SingleMovie | null>(null);
+  const [randomIndex, setRandomIndex] = useState(0);
+
+  useInterval(() => {
+    if (context && context.movieBank && context.movieBank.length > 0) {
+      setRandomIndex(Math.floor(Math.random() * context.movieBank.length));
+    }
+  }, 5000);
+
+  useEffect(() => {
+    const getMovie = async () => {
+      let url = context?.movieBank
+        ? `https://api.themoviedb.org/3/movie/${context?.movieBank[randomIndex].id}?api_key=923961f70cb93f1baadf5d2b9dc1a5e9`
+        : "";
+
+      try {
+        const res = await fetch(url, {
+          cache: "force-cache",
+        });
+
+        if (!res.ok) {
+          console.log("Failed to fetch data");
+        }
+
+        const data: SingleMovie = await res.json();
+        setMovie(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    if (
+      context &&
+      context.movieBank &&
+      context.movieBank.length > 0 &&
+      context.movieBank[0].id
+    ) {
+      getMovie();
+    }
+  }, [context, context?.movieBank, randomIndex]);
 
   return (
     <>
-      {context?.movies && context.movies.length > 0 && !context.loading && (
-        <Link
-          href={"/movie/" + context.movies[0].id}
-          className="relative h-[400px] block w-[95%] mx-auto rounded"
-        >
-          <Image
+      {context?.movieBank &&
+        context.movieBank.length > 0 &&
+        !context.movieBankLoading && (
+          <div
+            style={{
+              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://image.tmdb.org/t/p/w1280/${context.movieBank[randomIndex].backdrop_path})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              minHeight: "85vh",
+              backgroundColor: "#000",
+            }}
+            className="relative block w-[95%] mx-auto rounded"
+          >
+            {/* <Image
             src={
               context?.movies[0].backdrop_path
                 ? "https://image.tmdb.org/t/p/w1280" +
@@ -26,22 +79,43 @@ const Banner = () => {
             height={500}
             priority={false}
             className="h-full absolute top-0 rounded left-0 max-w-full w-full"
-          />
-          <div
-            style={{ background: "rgba(0,0,0,0.5)" }}
-            className="absolute top-0 left-0 h-full w-full z-10 flex items-end p-4"
-          >
-            <div className="p-4">
-              <h2 className="text-white mb-2 text-lg">
-                {context?.movies[0].title}
-              </h2>
-              <p className="text-xs text-gray-300 w-[80%] max-w-96">
-                {context?.movies[0].overview}
-              </p>
+          /> */}
+            <div className="absolute top-0 left-0 h-full w-full z-10 flex items-end p-4">
+              <div className="p-4">
+                <Link
+                  href={"/movie/" + context.movieBank[randomIndex].id}
+                  className="text-white block mb-2 text-3xl"
+                >
+                  {context?.movieBank[randomIndex].title}
+                </Link>
+                <Link
+                  href={"/movie/" + context.movieBank[randomIndex].id}
+                  className="text-xs block text-gray-300 w-[80%] max-w-96 leading-6"
+                >
+                  {context?.movieBank[randomIndex].overview}
+                </Link>
+                {context?.movieBank[randomIndex].vote_average && (
+                  <Rating
+                    value={context?.movieBank[randomIndex].vote_average / 2}
+                    className="max-w-[100px] mt-4"
+                    readOnly
+                  />
+                )}
+                {movie && (
+                  <a
+                    href={`https://www.imdb.com/title/${movie.imdb_id}`}
+                    target="_blank"
+                    rel="noopener noreferer"
+                    className="py-2 px-6 bg-primary text-white rounded inline-flex items-center gap-1 text-xs mt-4"
+                  >
+                    <Video className="w-4" />
+                    Watch trailer
+                  </a>
+                )}
+              </div>
             </div>
           </div>
-        </Link>
-      )}
+        )}
     </>
   );
 };
