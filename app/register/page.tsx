@@ -109,7 +109,7 @@ const Page = () => {
           Movie.<span className="text-primary">Empire</span>
         </Link>
         <div>
-          <h3 className="text-center my-2">Welcome back!</h3>
+          <h3 className="text-center my-2">Create your account</h3>
           <p className="text-xs text-gray-500 text-center">
             The empire of movies
           </p>
@@ -144,9 +144,9 @@ const Page = () => {
           </button>
         </form>
         <p className="mt-4 text-xs text-gray-400 text-center">
-          Dont have an account?{" "}
-          <Link className="text-primary hover:underline" href={"/register"}>
-            register
+          Already have an account?{" "}
+          <Link className="text-primary hover:underline" href={"/login"}>
+            login
           </Link>
         </p>
       </div>
