@@ -50,7 +50,7 @@ const PageBanner = ({ movie }: { movie: Movie }) => {
             zIndex: 1,
             width: "100vw"
           }}
-          className="relative block w-[95%] mx-auto rounded"
+          className="relative block w-[95%] mx-auto "
         >
           {/* <Image
                 src={
