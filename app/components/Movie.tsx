@@ -30,13 +30,16 @@ function Movie({ movie }: Props) {
       </div>
       <div className="h-[20%] bg-[#141313] text-white px-2 py-4 pb-8 flex items-center">
         <div>
-          {movie?.vote_average && (
-            <Rating
-              value={movie.vote_average / 2}
-              className="max-w-[100px] mt-1"
-              readOnly
-            />
-          )}
+          <div className="flex items-center gap-1 mt-1">
+            {movie?.vote_average && (
+              <Rating
+                value={movie.vote_average / 2}
+                className="max-w-[90px]"
+                readOnly
+              />
+            )}
+            <span className="text-xs">{movie.vote_average.toFixed(1) + "/10"}</span>
+          </div>
           <p className="mb-1">
             {movie.title.length > 15
               ? movie.title.substring(0, 15) + "..."
@@ -46,7 +49,11 @@ function Movie({ movie }: Props) {
             {movie.genre_ids.map((id) =>
               genres.map((genre) =>
                 genre.id === id ? (
-                  <Link href={`/genres/${genre.id}`} key={id} className="text-xs text-gray-500 hover:text-gray-600 hover:underline">
+                  <Link
+                    href={`/genres/${genre.id}`}
+                    key={id}
+                    className="text-xs text-gray-500 hover:text-gray-600 hover:underline"
+                  >
                     {genre.name}
                   </Link>
                 ) : (

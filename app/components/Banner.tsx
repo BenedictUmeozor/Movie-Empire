@@ -107,7 +107,7 @@ const Banner = () => {
               zIndex: 1,
               width: "100vw"
             }}
-            className="relative block w-[95%] mx-auto md:w-[100vw]"
+            className="relative block w-[95%] mx-auto md:w-[100%]"
           >
             {/* <Image
             src={

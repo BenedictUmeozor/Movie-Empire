@@ -48,7 +48,7 @@ const PageBanner = ({ movie }: { movie: Movie }) => {
             minHeight: "85vh",
             backgroundColor: "#000",
             zIndex: 1,
-            width: "100vw"
+            width: "100%"
           }}
           className="relative block w-[95%] mx-auto "
         >
