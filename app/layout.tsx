@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className + " bg-dark"}>
+      <body className={inter.className + " bg-dark overflow-x-hidden"}>
         <MovieContextProvider>
           <div className="h-screen grid grid-cols-5 overflow-x-hidden text-white max-md:block">
             <div className="col-span-1 bg-dark text-white py-4 px-4 h-full overflow-y-auto border-r-2 border-gray-900 max-md:hidden">
