@@ -88,6 +88,7 @@ const PageBanner = () => {
             minHeight: "85vh",
             backgroundColor: "#000",
             zIndex: 1,
+            width: "100vw"
           }}
           className="relative block w-[95%] mx-auto rounded"
         >
