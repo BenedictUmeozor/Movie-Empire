@@ -46,9 +46,9 @@ function Movie({ movie }: Props) {
             {movie.genre_ids.map((id) =>
               genres.map((genre) =>
                 genre.id === id ? (
-                  <span key={id} className="text-xs text-gray-500">
+                  <Link href={`/genres/${genre.id}`} key={id} className="text-xs text-gray-500 hover:text-gray-600">
                     {genre.name}
-                  </span>
+                  </Link>
                 ) : (
                   ""
                 )

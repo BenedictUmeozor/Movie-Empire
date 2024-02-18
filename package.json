@@ -16,6 +16,7 @@
     "react-feather": "^2.0.10",
     "react-headroom": "^3.2.1",
     "react-spinners": "^0.13.8",
+    "react-typewriter-hook": "^1.0.2",
     "uuid": "^9.0.1"
   },
   "devDependencies": {

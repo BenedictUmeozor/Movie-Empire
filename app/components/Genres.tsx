@@ -1,3 +1,8 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 export const genres = [
   {
     id: 28,
@@ -78,15 +83,24 @@ export const genres = [
 ];
 
 const Genres = () => {
+  const pathname = usePathname();
+
   return (
     <div>
       <ul>
         {genres.map((genre) => (
-          <li
-            key={genre.id}
-            className="flex items-center  gap-2 rounded-md p-4 bg-transparent text-white mb-1 transition-all duration-150 ease-linear cursor-pointer text-[0.9rem] hover:bg-slate-900"
-          >
-            {genre.name}
+          <li key={genre.id}>
+            <Link
+              className={
+                "flex items-center  gap-2 rounded-md p-4 mb-1 transition-all duration-150 ease-linear cursor-pointer text-[0.9rem] hover:bg-slate-900 " +
+                (pathname.split("/").includes(String(genre.id))
+                  ? "bg-primary text-white"
+                  : "bg-transparent text-white")
+              }
+              href={`/genres/${genre.id}`}
+            >
+              {genre.name}
+            </Link>
           </li>
         ))}
       </ul>

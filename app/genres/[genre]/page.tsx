@@ -6,31 +6,27 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Lock, Menu, Sun } from "react-feather";
 import Headroom from "react-headroom";
-import Pagination from "./components/Pagination";
-import Movies from "./components/Movies";
 import PageBanner from "./components/PageBanner";
+import Movies from "./components/Movies";
 import { removeFirstItem } from "@/utils/functions";
-import { useSearchParams } from "next/navigation";
+import Pagination from "./components/Pagination";
 
-const Page = ({ params }: { params: { term: string } }) => {
-  const [searchMoviesList, setSearchMoviesList] =
-    useState<MovieListResponse | null>(null);
-  const [searchedMovies, setSearchedMovies] = useState<Movie[] | null>(null);
-  const [searchLoading, setSearchLoading] = useState(true);
-  const searchParams = useSearchParams();
+const Page = ({ params }: { params: { genre: string } }) => {
+  const [movies, setMovies] = useState<Movie[] | null>(null);
+  const [movieList, setMovieList] = useState<MovieListResponse | null>(null);
+  const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    const p = searchParams.get("page");
-    setPage(Number(p));
-  }, [searchParams]);
+  const _setPage = (number: number) => {
+    setPage(number);
+  };
 
   useEffect(() => {
     const getMovies = async () => {
-      const url = `https://api.themoviedb.org/3/search/movie?query=${params.term.toLowerCase()}&page=${page}&api_key=923961f70cb93f1baadf5d2b9dc1a5e9`;
+      const url = `https://api.themoviedb.org/3/discover/movie?page=${page}&with_genres=${params.genre}&api_key=923961f70cb93f1baadf5d2b9dc1a5e9`;
 
       try {
-        setSearchLoading(true);
+        setLoading(true);
 
         const res = await fetch(url, {
           cache: "force-cache",
@@ -42,17 +38,17 @@ const Page = ({ params }: { params: { term: string } }) => {
 
         const data: MovieListResponse = await res.json();
 
-        setSearchMoviesList(data);
-        setSearchedMovies(data.results);
+        setMovieList(data);
+        setMovies(data.results);
       } catch (error) {
         console.log(error);
       } finally {
-        setSearchLoading(false);
+        setLoading(false);
       }
     };
 
     getMovies();
-  }, [page, params.term]);
+  }, [page, params.genre]);
 
   return (
     <div>
@@ -63,7 +59,7 @@ const Page = ({ params }: { params: { term: string } }) => {
             <Sun className="w-5 text-white" />
           </div>
           <div className="flex flex-[2] items-center justify-between gap-4 max-md:flex-[5]">
-            <MovieSearch term={params.term} />
+            <MovieSearch />
             <div className="flex-1 flex items-center justify-end">
               <Link href="/" className="flex items-center gap-2 max-md:hidden">
                 <span className="text-[0.9rem]">Login</span>{" "}
@@ -76,26 +72,27 @@ const Page = ({ params }: { params: { term: string } }) => {
       </Headroom>
 
       {/* banner  */}
-      {searchedMovies && <PageBanner movie={searchedMovies[0]} />}
+      {movies && <PageBanner movie={movies[0]} />}
 
-      {!searchedMovies && !searchLoading && <div>No results found</div>}
+      {!movies && !loading && <div>No results found</div>}
 
       {/* Movies  */}
-      {searchedMovies && (
+      {movies && (
         <Movies
-          movies={removeFirstItem(searchedMovies!)!}
-          loading={searchLoading}
+          movies={removeFirstItem(movies!)!}
+          loading={loading}
+          genre_id={Number(params.genre)}
         />
       )}
 
       {/* Pagination  */}
-      {searchedMovies && searchMoviesList && (
+      {movies && movieList && (
         <Pagination
-          loading={searchLoading}
-          movieList={searchMoviesList!}
-          movies={searchedMovies}
+          loading={loading}
+          movieList={movieList!}
+          movies={movies}
           page={page}
-          term={params.term}
+          _setPage={_setPage}
         />
       )}
     </div>

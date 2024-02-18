@@ -35,19 +35,19 @@ export const useMovieContext = () => {
 export const MovieContextProvider = ({ children }: { children: ReactNode }) => {
   const [moviesList, setMoviesList] = useState<MovieListResponse | null>(null);
   const [movies, setMovies] = useState<Movie[] | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [movieBank, setMovieBank] = useState<Movie[] | null>(null);
-  const [movieBankLoading, setMovieBankLoading] = useState(true);
+  const [movieBankLoading, setMovieBankLoading] = useState(false);
   const [trendingMoviesList, setTrendingMoviesList] =
     useState<MovieListResponse | null>(null);
   const [trendingMovies, setTrendingMovies] = useState<Movie[] | null>(null);
-  const [trendingMoviesLoading, setTrendingMoviesLoading] = useState(true);
+  const [trendingMoviesLoading, setTrendingMoviesLoading] = useState(false);
   const [topRatedList, setTopRatedList] = useState<MovieListResponse | null>(
     null
   );
   const [topMovies, setTopMovies] = useState<Movie[] | null>(null);
-  const [topMoviesLoading, setTopMoviesLoading] = useState(true);
+  const [topMoviesLoading, setTopMoviesLoading] = useState(false);
 
   const _setPage = (pageNumber: number) => {
     setPage(pageNumber);

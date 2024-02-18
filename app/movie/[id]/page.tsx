@@ -49,7 +49,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     const getMovies = async () => {
-      let url = `https://api.themoviedb.org/3/movie/${params.id}/similar?api_key=923961f70cb93f1baadf5d2b9dc1a5e9`;
+      let url = `https://api.themoviedb.org/3/movie/${params.id}/recommendations?api_key=923961f70cb93f1baadf5d2b9dc1a5e9`;
 
       try {
         setLoading(true);
@@ -111,7 +111,7 @@ export default function Page({ params }: { params: { id: string } }) {
                     width={200}
                     priority={false}
                     alt="image"
-                    className="h-full w-full block rounded "
+                    className="h-full w-full block rounded object-cover "
                   />
                 </div>
               </div>

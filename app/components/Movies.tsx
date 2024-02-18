@@ -46,19 +46,6 @@ function Movies() {
     );
   }
 
-  if (
-    (movies === null || movies === undefined || movies.length === 0) &&
-    !context?.loading &&
-    !context?.trendingMoviesLoading &&
-    !context?.topMoviesLoading
-  ) {
-    return (
-      <div className="text-white text-center my-8">
-        Oops! No results was found
-      </div>
-    );
-  }
-
   return (
     <>
       {movies && !context?.movieBankLoading && (
@@ -74,7 +61,7 @@ function Movies() {
             </div>
           )}
           <div
-            className="grid grid-cols-4 gap-4 px-6 my-4 max-lg:grid-cols-2 max-md:grid-cols-1
+            className="grid grid-cols-4 gap-8 px-6 my-4 max-lg:grid-cols-2 max-md:grid-cols-1
           "
           >
             {movies.length > 0 ? (
@@ -85,6 +72,13 @@ function Movies() {
           </div>
         </>
       )}
+
+      {!movies ||
+        (!movies.length && (
+          <div className="text-white text-center my-8">
+            Oops! No results was found
+          </div>
+        ))}
     </>
   );
 }
