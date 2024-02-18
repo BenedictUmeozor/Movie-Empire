@@ -1,16 +1,15 @@
 "use client";
 
-import MovieSearch from "@/app/components/MovieSearch";
 import { Movie, MovieListResponse } from "@/types/types";
-import Link from "next/link";
+
 import { useEffect, useState } from "react";
-import { Lock, Menu, Sun } from "react-feather";
-import Headroom from "react-headroom";
+
 import Pagination from "./components/Pagination";
 import Movies from "./components/Movies";
 import PageBanner from "./components/PageBanner";
 import { removeFirstItem } from "@/utils/functions";
 import { useSearchParams } from "next/navigation";
+import Header from "@/app/components/Header";
 
 const Page = ({ params }: { params: { term: string } }) => {
   const [searchMoviesList, setSearchMoviesList] =
@@ -57,23 +56,7 @@ const Page = ({ params }: { params: { term: string } }) => {
   return (
     <div>
       {/* header  */}
-      <Headroom className="z-[999999]">
-        <header className="flex  z-[1000] items-center justify-between bg-dark text-white px-4 py-4">
-          <div className="flex-1">
-            <Sun className="w-5 text-white" />
-          </div>
-          <div className="flex flex-[2] items-center justify-between gap-4 max-md:flex-[5]">
-            <MovieSearch term={params.term} />
-            <div className="flex-1 flex items-center justify-end">
-              <Link href="/" className="flex items-center gap-2 max-md:hidden">
-                <span className="text-[0.9rem]">Login</span>{" "}
-                <Lock className="w-4 text-white" />
-              </Link>
-              <Menu className="w-5 md:hidden" />
-            </div>
-          </div>
-        </header>
-      </Headroom>
+      <Header term={params.term} />
 
       {/* banner  */}
       {searchedMovies && <PageBanner movie={searchedMovies[0]} />}

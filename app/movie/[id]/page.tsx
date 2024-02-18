@@ -1,6 +1,7 @@
 "use client";
 
 import { genres } from "@/app/components/Genres";
+import Header from "@/app/components/Header";
 import Movie from "@/app/components/Movie";
 import {
   MovieListResponse,
@@ -10,9 +11,8 @@ import {
 import { shuffleArray } from "@/utils/functions";
 import { Rating } from "@smastrom/react-rating";
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Lock, Sun, Watch } from "react-feather";
+import { Watch } from "react-feather";
 import { MoonLoader } from "react-spinners";
 
 export default function Page({ params }: { params: { id: string } }) {
@@ -76,19 +76,7 @@ export default function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <div className="p-4">
-        <header className="flex sticky top-0 z-[100] items-center justify-between bg-dark text-white px-4 py-4 border-b-2 border-gray-900">
-          <div className="">
-            <Sun className="w-5 text-white" />
-          </div>
-          <div className="flex  items-center justify-between gap-4">
-            <div className="flex-1 flex items-center justify-end">
-              <Link href="/" className="flex items-center gap-2">
-                <span className="text-[0.9rem]">Login</span>{" "}
-                <Lock className="w-4 text-white" />
-              </Link>
-            </div>
-          </div>
-        </header>
+        <Header />
         {loading && (
           <>
             <div className="flex items-center justify-center mt-8">
