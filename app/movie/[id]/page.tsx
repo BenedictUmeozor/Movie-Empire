@@ -98,9 +98,9 @@ export default function Page({ params }: { params: { id: string } }) {
         )}
         {movie && !loading && (
           <>
-            <div className="mt-8 grid grid-cols-6 gap-10">
+            <div className="mt-8 grid grid-cols-6 gap-10 max-md:block">
               <div className="col-span-2">
-                <div className="h-96">
+                <div className="h-96 max-md:hidden">
                   <Image
                     src={
                       movie?.poster_path
@@ -111,7 +111,7 @@ export default function Page({ params }: { params: { id: string } }) {
                     width={200}
                     priority={false}
                     alt="image"
-                    className="h-full w-full block rounded"
+                    className="h-full w-full block rounded "
                   />
                 </div>
               </div>
@@ -147,6 +147,21 @@ export default function Page({ params }: { params: { id: string } }) {
                       )
                     )
                   )}
+                </div>
+
+                <div className="h-96 my-8 md:hidden">
+                  <Image
+                    src={
+                      movie?.poster_path
+                        ? "https://image.tmdb.org/t/p/w500" + movie.poster_path
+                        : "/image2.jpg"
+                    }
+                    height={200}
+                    width={200}
+                    priority={false}
+                    alt="image"
+                    className="h-full block rounded mx-auto w-[90%]"
+                  />
                 </div>
 
                 <div className="my-6">
@@ -216,7 +231,7 @@ export default function Page({ params }: { params: { id: string } }) {
               </h2>
               {movies && (
                 <>
-                  <div className="grid grid-cols-4 gap-4 px-6 my-4">
+                  <div className="grid grid-cols-4 gap-4 px-6 my-4 max-md:grid-cols-1">
                     {movies.length > 0 ? (
                       movies.map((movie) => (
                         <Movie key={movie.id} movie={movie} />

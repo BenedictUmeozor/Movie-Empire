@@ -6,6 +6,7 @@ import { useMovieContext } from "@/contexts/MovieContext";
 import { useEffect, useRef, useState } from "react";
 import { Movie as MovieType } from "@/types/types";
 import { usePathname } from "next/navigation";
+import { removeFirstItem } from "@/utils/functions";
 
 function Movies() {
   const context = useMovieContext();
@@ -37,17 +38,6 @@ function Movies() {
     pathname,
   ]);
 
-  useEffect(() => {
-    if (context && context.searchTerm && context.searchTerm.length > 0) {
-      if (elementRef.current) {
-        elementRef.current.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
-    }
-  }, [context, context?.searchTerm]);
-
   if (context?.loading) {
     return (
       <div className="flex items-center justify-center mt-8">
@@ -71,18 +61,20 @@ function Movies() {
 
   return (
     <>
-      {movies && (
+      {movies && !context?.movieBankLoading && (
         <>
           {movies.length > 1 && (
             <div
               ref={elementRef}
-              className="text-2xl font-bold my-8 px-6 text-white"
+              className="text-2xl font-bold my-8 mt-12 px-6 text-white capitalize max-md:text-center"
             >
-              Discover...
+              {pathname === "/"
+                ? "Discover..."
+                : removeFirstItem(pathname.split("/")).join("") + "..."}
             </div>
           )}
           <div
-            className="grid grid-cols-4 gap-4 px-6 my-4 max-lg:grid-cols-2
+            className="grid grid-cols-4 gap-4 px-6 my-4 max-lg:grid-cols-2 max-md:grid-cols-1
           "
           >
             {movies.length > 0 ? (

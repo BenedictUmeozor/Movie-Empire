@@ -6,8 +6,12 @@ import { useEffect } from "react";
 const RemoveStates = () => {
   const context = useMovieContext();
 
+  const removeStates = () => {
+    context?._setPage(1);
+  };
+
   useEffect(() => {
-    context?._setSearchTerm("");
+    removeStates();
   }, []);
 
   return <div></div>;

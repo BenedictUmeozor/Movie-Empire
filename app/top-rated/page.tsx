@@ -1,10 +1,10 @@
 import { Lock, Sun } from "react-feather";
 import MovieSearch from "../components/MovieSearch";
 import Link from "next/link";
-import Banner from "../components/Banner";
 import Movies from "../components/Movies";
 import Pagination from "../components/Pagination";
 import RemoveStates from "../components/RemoveStates";
+import PageBanner from "../components/PageBanner";
 
 export default function Page() {
   return (
@@ -27,7 +27,7 @@ export default function Page() {
       </header>
 
       {/* banner  */}
-      <Banner />
+      <PageBanner />
 
       {/* Movies  */}
       <Movies />
