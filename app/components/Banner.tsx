@@ -92,24 +92,21 @@ const Banner = () => {
 
   return (
     <>
-      {context?.movieBank &&
-        !loading &&
-        context.movieBank.length > 0 &&
-        !context.movieBankLoading && (
-          <div
-            style={{
-              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://image.tmdb.org/t/p/w1280/${context.movieBank[randomIndex].backdrop_path})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              minHeight: "85vh",
-              backgroundColor: "#000",
-              zIndex: 1,
-              width: "100%"
-            }}
-            className="relative block w-[95%] mx-auto md:w-[100%]"
-          >
-            {/* <Image
+      {movies && !loading && (
+        <div
+          style={{
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://image.tmdb.org/t/p/w1280/${movies[randomIndex].backdrop_path})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            minHeight: "85vh",
+            backgroundColor: "#000",
+            zIndex: 1,
+            width: "100%",
+          }}
+          className="relative block w-[95%] mx-auto md:w-[100%]"
+        >
+          {/* <Image
             src={
               context?.movies[0].backdrop_path
                 ? "https://image.tmdb.org/t/p/w1280" +
@@ -122,42 +119,42 @@ const Banner = () => {
             priority={false}
             className="h-full absolute top-0 rounded left-0 max-w-full w-full"
           /> */}
-            <div className="absolute top-0 left-0 h-full w-full z-10 flex items-end p-4">
-              <div className="p-4 max-md:text-center">
-                <Link
-                  href={"/movie/" + context.movieBank[randomIndex].id}
-                  className="text-white block mb-2 text-3xl"
+          <div className="absolute top-0 left-0 h-full w-full z-10 flex items-end p-4">
+            <div className="p-4 max-md:text-center">
+              <Link
+                href={"/movie/" + movies[randomIndex].id}
+                className="text-white block mb-2 text-3xl"
+              >
+                {movies[randomIndex].title}
+              </Link>
+              <Link
+                href={"/movie/" + movies[randomIndex].id}
+                className="text-xs block text-gray-300 w-[80%] max-w-96 max-md:w-full max-md:max-w-full leading-6 max-md:leading-5"
+              >
+                {movies[randomIndex].overview}
+              </Link>
+              {movies[randomIndex].vote_average && (
+                <Rating
+                  value={movies[randomIndex].vote_average / 2}
+                  className="max-w-[100px] max-md:mx-auto mt-4"
+                  readOnly
+                />
+              )}
+              {movie && (
+                <a
+                  href={`https://www.imdb.com/title/${movie.imdb_id}`}
+                  target="_blank"
+                  rel="noopener noreferer"
+                  className="py-2 px-6 bg-primary text-white rounded inline-flex items-center gap-1 text-xs mt-4"
                 >
-                  {context?.movieBank[randomIndex].title}
-                </Link>
-                <Link
-                  href={"/movie/" + context.movieBank[randomIndex].id}
-                  className="text-xs block text-gray-300 w-[80%] max-w-96 max-md:w-full max-md:max-w-full leading-6 max-md:leading-5"
-                >
-                  {context?.movieBank[randomIndex].overview}
-                </Link>
-                {context?.movieBank[randomIndex].vote_average && (
-                  <Rating
-                    value={context?.movieBank[randomIndex].vote_average / 2}
-                    className="max-w-[100px] max-md:mx-auto mt-4"
-                    readOnly
-                  />
-                )}
-                {movie && (
-                  <a
-                    href={`https://www.imdb.com/title/${movie.imdb_id}`}
-                    target="_blank"
-                    rel="noopener noreferer"
-                    className="py-2 px-6 bg-primary text-white rounded inline-flex items-center gap-1 text-xs mt-4"
-                  >
-                    <Video className="w-4" />
-                    Watch trailer
-                  </a>
-                )}
-              </div>
+                  <Video className="w-4" />
+                  Watch trailer
+                </a>
+              )}
             </div>
           </div>
-        )}
+        </div>
+      )}
     </>
   );
 };
