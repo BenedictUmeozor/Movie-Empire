@@ -19,7 +19,7 @@ const Banner = () => {
     if (context && context.movieBank && context.movieBank.length > 0) {
       setRandomIndex(Math.floor(Math.random() * context.movieBank.length));
     }
-  }, 10000);
+  }, 5000);
 
   useEffect(() => {
     if (context && context.movieBank && context.movieBank.length > 0) {

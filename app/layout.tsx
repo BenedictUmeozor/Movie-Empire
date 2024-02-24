@@ -6,6 +6,7 @@ import { MovieContextProvider } from "@/contexts/MovieContext";
 import "@smastrom/react-rating/style.css";
 
 import LayoutToShow from "./components/LayoutToShow";
+import AuthProvider from "./Providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,9 +25,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className + " bg-dark overflow-x-hidden"}>
-        <MovieContextProvider>
-          <LayoutToShow>{children}</LayoutToShow>
-        </MovieContextProvider>
+        <AuthProvider>
+          <MovieContextProvider>
+            <LayoutToShow>{children}</LayoutToShow>
+          </MovieContextProvider>
+        </AuthProvider>
       </body>
     </html>
   );

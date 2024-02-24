@@ -9,6 +9,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { Toaster } from "react-hot-toast";
 
 type Context = {
   movies: Movie[] | null;
@@ -189,7 +190,10 @@ export const MovieContextProvider = ({ children }: { children: ReactNode }) => {
         topRatedList,
       }}
     >
-      {children}
+      <div>
+        <Toaster />
+        {children}
+      </div>
     </MovieContext.Provider>
   );
 };

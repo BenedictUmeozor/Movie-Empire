@@ -5,8 +5,13 @@ import Pagination from "./components/Pagination";
 import RemoveStates from "./components/RemoveStates";
 
 import Header from "./components/Header";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
 
-function Home() {
+async function Home() {
+  const session = await getServerSession(authOptions);
+  console.log(session);
+
   return (
     <div>
       {/* header  */}

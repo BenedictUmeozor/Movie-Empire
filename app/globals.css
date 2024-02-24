@@ -50,3 +50,7 @@ button:disabled {
 a, button {
   transition: all 0.3s ease-in;
 }
+
+input {
+  appearance: none;
+}
