@@ -22,6 +22,21 @@ export type MovieListResponse = {
   total_results: number;
 };
 
+export type Cast = {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string;
+  cast_id: number;
+  character: string;
+  credit_id: string;
+  order: number;
+};
+
 export type SingleMovie = {
   adult: boolean;
   backdrop_path: string;
@@ -68,4 +83,7 @@ export type SingleMovie = {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  credits: {
+    cast: Cast[];
+  };
 };

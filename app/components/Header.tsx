@@ -26,7 +26,7 @@ const Header = ({ term }: { term?: string }) => {
               {status === "authenticated" ? (
                 <>
                   <button
-                    className="px-6 py-2 text-[0.9rem] text-white bg-primary rounded"
+                    className="px-6 py-2 text-[0.9rem] text-white bg-primary rounded max-md:hidden"
                     onClick={logout}
                   >
                     Log out

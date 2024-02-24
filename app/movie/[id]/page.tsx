@@ -12,8 +12,13 @@ import { shuffleArray } from "@/utils/functions";
 import { Rating } from "@smastrom/react-rating";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Watch } from "react-feather";
+import { Video, Watch } from "react-feather";
 import { MoonLoader } from "react-spinners";
+import Overview from "./components/Overview";
+import ProductionCompanies from "./components/ProductionCompanies";
+import ProductionCountries from "./components/ProductionCountries";
+import Actors from "./components/Cast";
+import Recommendations from "./components/Recommendations";
 
 export default function Page({ params }: { params: { id: string } }) {
   const [movie, setMovie] = useState<SingleMovie | null>(null);
@@ -22,7 +27,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     const getMovie = async () => {
-      let url = `https://api.themoviedb.org/3/movie/${params.id}?api_key=923961f70cb93f1baadf5d2b9dc1a5e9`;
+      let url = `https://api.themoviedb.org/3/movie/${params.id}?append_to_response=credits&api_key=923961f70cb93f1baadf5d2b9dc1a5e9`;
 
       try {
         setLoading(true);
@@ -45,7 +50,7 @@ export default function Page({ params }: { params: { id: string } }) {
     };
 
     getMovie();
-  }, []);
+  }, [params.id]);
 
   useEffect(() => {
     const getMovies = async () => {
@@ -71,7 +76,7 @@ export default function Page({ params }: { params: { id: string } }) {
     };
 
     getMovies();
-  }, []);
+  }, [params.id]);
 
   return (
     <>
@@ -88,7 +93,7 @@ export default function Page({ params }: { params: { id: string } }) {
           <>
             <div className="mt-8 grid grid-cols-6 gap-10 max-md:block">
               <div className="col-span-2">
-                <div className="h-96 max-md:hidden">
+                <div className="h-[50vh] max-md:hidden">
                   <Image
                     src={
                       movie?.poster_path
@@ -137,7 +142,7 @@ export default function Page({ params }: { params: { id: string } }) {
                   )}
                 </div>
 
-                <div className="h-96 my-8 md:hidden">
+                <div className="h-[70vh] my-8 md:hidden">
                   <Image
                     src={
                       movie?.poster_path
@@ -148,70 +153,37 @@ export default function Page({ params }: { params: { id: string } }) {
                     width={200}
                     priority={false}
                     alt="image"
-                    className="h-full block rounded mx-auto w-[90%]"
+                    className="h-full block rounded mx-auto w-[90%] object-cover"
                   />
                 </div>
 
-                <div className="my-6">
-                  <h2 className="mb-2 text-lg">Overview</h2>
-                  <p className="text-gray-400 text-[0.9rem]">
-                    {movie?.overview}
-                  </p>
-                </div>
+                <Overview overview={movie.overview} />
 
                 {movie.production_companies.length > 0 && (
-                  <>
-                    <div className="mt-10">
-                      <h3 className="mb-2 text-lg">Production Companies</h3>
-                      <div className="grid grid-cols-4 gap-4 mt-6">
-                        {movie.production_companies.map(
-                          (company) =>
-                            company.logo_path && (
-                              <div key={company.id}>
-                                <Image
-                                  src={
-                                    company.logo_path
-                                      ? "https://image.tmdb.org/t/p/w500" +
-                                        company.logo_path
-                                      : "/download.png"
-                                  }
-                                  alt={company.name}
-                                  width={200}
-                                  height={200}
-                                  className="max-w-full"
-                                />
-                              </div>
-                            )
-                        )}
-                      </div>
-                    </div>
-                  </>
+                  <ProductionCompanies companies={movie.production_companies} />
                 )}
 
                 {movie.production_countries.length > 0 && (
-                  <div className="mt-10">
-                    <h3 className="mb-2 text-lg">Production Countries</h3>
-                    <div className="flex flex-wrap gap-3">
-                      {movie.production_countries.map((country) => (
-                        <div
-                          key={country.iso_3166_1}
-                          className="inline-flex items-center gap-1"
-                        >
-                          <Image
-                            src={`https://flagcdn.com/48x36/${country.iso_3166_1.toLowerCase()}.png`}
-                            alt={country.name}
-                            width={20}
-                            height={20}
-                            className="w-5"
-                          />
-                          <span className="text-xs">{country.name}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  <ProductionCountries countries={movie.production_countries} />
                 )}
+
+                <div className="my-8 max-md:text-center">
+                  <a
+                    href={`https://www.imdb.com/title/${movie.imdb_id}`}
+                    target="_blank"
+                    rel="noopener noreferer"
+                    className="py-2 px-6 bg-primary text-white rounded inline-flex items-center gap-1 text-xs mt-4"
+                  >
+                    <Video className="w-4" />
+                    Watch trailer
+                  </a>
+                </div>
               </div>
             </div>
+
+            {movie.credits.cast && movie.credits.cast.length > 0 && (
+              <Actors casts={movie.credits.cast} />
+            )}
 
             <div className="mt-24 mb-4">
               <h2 className="text-4xl text-center text-white mb-8">
@@ -219,17 +191,7 @@ export default function Page({ params }: { params: { id: string } }) {
               </h2>
               {movies && (
                 <>
-                  <div className="grid grid-cols-4 gap-4 px-6 my-4 max-md:grid-cols-1">
-                    {movies.length > 0 ? (
-                      movies.map((movie) => (
-                        <Movie key={movie.id} movie={movie} />
-                      ))
-                    ) : (
-                      <div className="text-white my-8">
-                        Oops! No results was found
-                      </div>
-                    )}
-                  </div>
+                  <Recommendations movies={movies} />
                 </>
               )}
             </div>
