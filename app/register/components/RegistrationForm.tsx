@@ -24,6 +24,7 @@ export default function RegistrationForm() {
 
     try {
       setLoading(true);
+      setError("");
       const resUserExists = await fetch("api/auth/userExists", {
         method: "POST",
         headers: {

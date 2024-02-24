@@ -6,13 +6,20 @@ import { Movie, MovieListResponse, SingleMovie } from "@/types/types";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import LoginForm from "./components/LoginForm";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
+  const { status } = useSession();
+  const router = useRouter();
+
+  if (status === "authenticated") {
+    router.push("/");
+  }
+
   const context = useMovieContext();
   const [movies, setMovies] = useState<Movie[] | null>(null);
-  const [movie, setMovie] = useState<SingleMovie | null>(null);
   const [randomIndex, setRandomIndex] = useState(0);
-  const [loading, setLoading] = useState(false);
 
   useInterval(() => {
     if (context && context.movieBank && context.movieBank.length > 0) {
@@ -29,7 +36,6 @@ const Page = () => {
   useEffect(() => {
     const getMovieBank = async () => {
       try {
-        setLoading(true);
         const res = await fetch(
           `https://api.themoviedb.org/3/discover/movie?page=${Math.floor(
             Math.random() * 10
@@ -47,47 +53,11 @@ const Page = () => {
         setMovies(data.results);
       } catch (error) {
         console.log(error);
-      } finally {
-        setLoading(false);
       }
     };
 
     getMovieBank();
   }, []);
-
-  useEffect(() => {
-    const getMovie = async () => {
-      let url = movies
-        ? `https://api.themoviedb.org/3/movie/${movies[randomIndex].id}?api_key=923961f70cb93f1baadf5d2b9dc1a5e9`
-        : "";
-
-      try {
-        const res = await fetch(url, {
-          cache: "force-cache",
-        });
-
-        if (!res.ok) {
-          console.log("Failed to fetch data");
-        }
-
-        const data: SingleMovie = await res.json();
-        setMovie(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    if (
-      context &&
-      context.movieBank &&
-      context.movieBank.length > 0 &&
-      context.movieBank[0].id
-    ) {
-      if (movies) {
-        getMovie();
-      }
-    }
-  }, [context, context?.movieBank, randomIndex, movies]);
 
   return (
     <div

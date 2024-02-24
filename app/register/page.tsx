@@ -13,10 +13,6 @@ const Page = () => {
   const { status } = useSession();
   const router = useRouter();
 
-  useEffect(() => {
-    console.log(status);
-  }, [status]);
-
   if (status === "authenticated") {
     router.push("/");
   }
