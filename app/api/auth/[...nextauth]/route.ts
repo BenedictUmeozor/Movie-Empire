@@ -1,4 +1,3 @@
-import { NextApiHandler } from "next";
 import connectToDatabase from "@/libs/database";
 import User from "@/models/user";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -50,6 +49,6 @@ const authOptions: NextAuthOptions = {
   },
 };
 
-const handler: NextApiHandler = NextAuth(authOptions);
+export const handler = NextAuth(authOptions) as never;
 
 export { handler as GET, handler as POST };
