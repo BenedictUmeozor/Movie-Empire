@@ -122,7 +122,7 @@ export const MovieContextProvider = ({ children }: { children: ReactNode }) => {
       setMovieBankLoading(true);
       const res = await fetch(
         `https://api.themoviedb.org/3/discover/movie?page=${Math.floor(
-          Math.random() * 10
+          Math.random() * 120
         )}&api_key=923961f70cb93f1baadf5d2b9dc1a5e9`,
         {
           cache: "force-cache",
