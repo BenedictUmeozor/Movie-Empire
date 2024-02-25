@@ -21,7 +21,7 @@ const LayoutLinks = () => {
               : "bg-transparent text-white")
           }
         >
-          <Globe className="w-5 text-white" />
+          <Globe className="w-5 text-white md:hidden lg:block" />
           <span className="text-[0.9rem]">Browse</span>
         </Link>
       </li>
@@ -35,7 +35,7 @@ const LayoutLinks = () => {
               : "bg-transparent text-white")
           }
         >
-          <Activity className="w-5 text-white" />
+          <Activity className="w-5 text-white md:hidden lg:block" />
           <span className="text-[0.9rem]">Trending</span>
         </Link>
       </li>
@@ -49,7 +49,7 @@ const LayoutLinks = () => {
               : "bg-transparent text-white")
           }
         >
-          <Star className="w-5 text-white" />
+          <Star className="w-5 text-white md:hidden lg:block" />
           <span className="text-[0.9rem]">Top Rated</span>
         </Link>
       </li>
@@ -64,7 +64,7 @@ const LayoutLinks = () => {
                 : "bg-transparent text-white")
             }
           >
-            <Video className="w-5 text-white" />
+            <Video className="w-5 text-white md:hidden lg:block" />
             <span className="text-[0.9rem]">My Videos</span>
           </Link>
         </li>

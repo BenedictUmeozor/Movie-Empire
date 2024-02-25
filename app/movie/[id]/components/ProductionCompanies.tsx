@@ -11,10 +11,10 @@ type Props = {
 export default function ProductionCompanies({ companies }: Props) {
   return (
     <div className="mt-10">
-      <h3 className="mb-2 text-lg max-md:text-xl max-md:mb-4 max-md:text-center">
+      <h3 className="mb-2 text-lg max-lg:text-xl max-lg:mb-4 max-lg:text-center">
         Production Companies
       </h3>
-      <div className="grid grid-cols-4 gap-4 mt-6 max-md:grid-cols-2">
+      <div className="grid grid-cols-4 gap-4 mt-6 max-lg:grid-cols-2">
         {companies.map(
           (company) =>
             company.logo_path && (

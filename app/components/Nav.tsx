@@ -23,7 +23,7 @@ export default function Nav({ hideNav }: Props) {
   return (
     <nav className="h-screen fixed top-0 left-0 w-full bg-dark z-[9999] px-2 pb-4 overflow-y-auto">
       <header className="flex  items-center justify-between bg-dark text-white px-4 py-4 md:hidden">
-        <Link href={"/"} className="flex-1">
+        <Link href={"/"} className="flex-1 px-2">
           <Video fill="#AC1B1B" className="w-5 text-primary" />
         </Link>
 

@@ -6,9 +6,9 @@ type Props = {
 };
 export default function Actors({ casts }: Props) {
   return (
-    <div className="mt-10 max-md:text-center">
+    <div className="mt-10 max-lg:text-center">
       <h3 className="mb-3 text-xl ">Top Cast</h3>
-      <div className="grid grid-cols-6 gap-8 mt-6 max-md:grid-cols-3">
+      <div className="grid grid-cols-6 gap-8 mt-6 max-lg:grid-cols-3">
         {casts.length > 6
           ? casts.slice(0, 6).map((person) => (
               <div key={person.id}>

@@ -12,7 +12,7 @@ function Movie({ movie }: Props) {
   return (
     <Link
       href={"/movie/" + movie.id}
-      className="h-96 max-md:h-[70vh] flex flex-col gap-2 bg-[#141313] rounded-lg cursor-pointer transition-all duration-150 ease-linear hover:scale-105 max-md:w-[80%] max-md:mx-auto"
+      className="h-96 max-md:h-[70vh] flex flex-col gap-2 bg-[#141313] rounded-lg cursor-pointer transition-all duration-150 ease-linear hover:scale-105 max-md:w-[90%] max-md:mx-auto"
     >
       <div className="h-[80%]">
         <Image

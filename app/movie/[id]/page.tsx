@@ -2,7 +2,6 @@
 
 import { genres } from "@/app/components/Genres";
 import Header from "@/app/components/Header";
-import Movie from "@/app/components/Movie";
 import {
   MovieListResponse,
   Movie as MovieType,
@@ -91,9 +90,9 @@ export default function Page({ params }: { params: { id: string } }) {
         )}
         {movie && !loading && (
           <>
-            <div className="mt-8 grid grid-cols-6 gap-10 max-md:block">
+            <div className="mt-8 grid grid-cols-6 gap-10 max-lg:block">
               <div className="col-span-2">
-                <div className="h-[50vh] max-md:hidden">
+                <div className="h-[50vh] max-lg:hidden">
                   <Image
                     src={
                       movie?.poster_path
@@ -142,7 +141,7 @@ export default function Page({ params }: { params: { id: string } }) {
                   )}
                 </div>
 
-                <div className="h-[70vh] my-8 md:hidden">
+                <div className="h-[70vh] my-8 lg:hidden">
                   <Image
                     src={
                       movie?.poster_path
