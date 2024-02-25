@@ -196,6 +196,17 @@ export default function Page({ params }: { params: { id: string } }) {
             </div>
           </>
         )}
+        <footer className="mt-6 mb-4 text-center">
+          <p className="text-xs text-gray-500">
+            All rights reserved &copy;{" "}
+            <a
+              href="https://benedictumeozor.vercel.app"
+              rel="noopener noreferrer"
+            >
+              Benedict
+            </a>
+          </p>
+        </footer>
       </div>
     </>
   );
