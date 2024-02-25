@@ -6,7 +6,7 @@ import bcrypt from "bcryptjs";
 import NextAuth from "next-auth/next";
 import { NextAuthOptions } from "next-auth";
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "credentials",
