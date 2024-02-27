@@ -7,6 +7,7 @@ import "@smastrom/react-rating/style.css";
 
 import LayoutToShow from "./components/LayoutToShow";
 import AuthProvider from "./Providers";
+import FooterNav from "./components/FooterNav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +29,7 @@ export default function RootLayout({
         <AuthProvider>
           <MovieContextProvider>
             <LayoutToShow>{children}</LayoutToShow>
+            <FooterNav />
           </MovieContextProvider>
         </AuthProvider>
       </body>

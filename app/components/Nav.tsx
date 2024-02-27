@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { genres } from "./Genres";
-import LayoutLinks from "./LayoutLinks";
 import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { Lock, Video, X } from "react-feather";
@@ -55,8 +54,6 @@ export default function Nav({ hideNav }: Props) {
           </Link>
         )}
       </div>
-      <p className="text-[0.9rem] text-gray-400 mb-8">News Feed</p>
-      <LayoutLinks />
       <p className="text-[0.9rem] text-gray-400 mb-8 mt-12">Genres</p>
       <ul className="flex items-center gap-4 flex-wrap">
         {genres.map((genre) => (
