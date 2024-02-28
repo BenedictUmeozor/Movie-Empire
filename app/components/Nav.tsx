@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { Lock, Video, X } from "react-feather";
 import MovieSearch from "./MovieSearch";
+import toast from "react-hot-toast";
 
 type Props = {
   hideNav: () => void;
@@ -17,6 +18,7 @@ export default function Nav({ hideNav }: Props) {
 
   const logout = async () => {
     await signOut({ callbackUrl: "/" });
+    return toast.success("You are logged out")
   };
 
   return (

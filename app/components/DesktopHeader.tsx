@@ -4,12 +4,14 @@ import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { Lock, Video } from "react-feather";
 import MovieSearch from "./MovieSearch";
+import toast from "react-hot-toast";
 
 export default function DesktopHeader({ term }: { term?: string }) {
   const { status } = useSession();
 
   const logout = async () => {
     await signOut({ callbackUrl: "/" });
+    return toast.success("You are logged out")
   };
 
   return (

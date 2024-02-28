@@ -69,6 +69,7 @@ export default function RegistrationForm() {
         }
 
         router.push("/");
+        return toast.success("Welcome to movie empire!");
       } else {
         setError("Registration failed");
       }

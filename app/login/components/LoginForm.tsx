@@ -14,6 +14,10 @@ export default function LoginForm() {
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!email || !password) {
+      return toast.error("All fields are required");
+    }
+
     try {
       setError("");
       setLoading(true);
@@ -26,6 +30,8 @@ export default function LoginForm() {
       if (login?.error) {
         toast.error("An error occurred");
       }
+
+      return toast.success("You are logged in");
     } catch (error) {
       console.log(error);
     } finally {

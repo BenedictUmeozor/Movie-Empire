@@ -24,7 +24,7 @@ export default function FooterNav() {
     <div
       style={{ background: "rgba(0,0,0,0.9)" }}
       className={
-        "md:hidden fixed bottom-0 left-0 w-full z-[999] pb-2 px-2 " +
+        "md:hidden fixed bottom-0 left-0 w-full z-[999] pb-2 " +
         (isAuthPage && "hidden")
       }
     >
