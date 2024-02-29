@@ -28,7 +28,7 @@ export default function FooterNav() {
         (isAuthPage && "hidden")
       }
     >
-      <ul className="mt-4 flex items-center justify-between">
+      <ul className="mt-4 flex items-center justify-between px-2">
         <li>
           <Link
             href="/"
@@ -39,7 +39,7 @@ export default function FooterNav() {
           >
             <Globe
               className={
-                "w-24  md:hidden lg:block" +
+                "w-[50%] md:hidden lg:block" +
                 (pathname === "/" ? "text-primary" : " text-white")
               }
             />
@@ -56,7 +56,7 @@ export default function FooterNav() {
           >
             <Activity
               className={
-                "w-24  md:hidden lg:block" +
+                "w-[50%]  md:hidden lg:block" +
                 (pathname === "/trending" ? "text-primary" : " text-white")
               }
             />
@@ -73,7 +73,7 @@ export default function FooterNav() {
           >
             <Star
               className={
-                "w-24  md:hidden lg:block" +
+                "w-[50%]  md:hidden lg:block" +
                 (pathname === "/top-rated" ? "text-primary" : " text-white")
               }
             />
@@ -91,7 +91,7 @@ export default function FooterNav() {
             >
               <Video
                 className={
-                  "w-24  md:hidden lg:block" +
+                  "w-[50%]  md:hidden lg:block" +
                   (pathname === "/my-videos" ? "text-primary" : " text-white")
                 }
               />
