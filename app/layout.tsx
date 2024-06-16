@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { MovieContextProvider } from "@/contexts/MovieContext";
@@ -14,6 +14,10 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "The movie empire",
   description: "Website for movies",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#100f12",
 };
 
 // 7d7d2b16
